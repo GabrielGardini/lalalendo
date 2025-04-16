@@ -50,38 +50,43 @@ struct SimplePageView: View {
     var imageName: String
 
     var body: some View {
-        HStack {
-            // 📕 Esquerda: Texto + Botões
-            VStack(alignment: .leading, spacing: 20) {
-                Text(text)
-                    .font(.title)
-                    .foregroundColor(.white)
+        GeometryReader { geometry in
+            HStack(spacing: 0) {
+                // 📕 Esquerda: Texto + Botões
+                VStack(alignment: .leading, spacing: 20) {
+                    Text(text)
+                        .font(.title)
+                        .foregroundColor(.white)
 
-                VStack(spacing: 10) {
-                    HStack(spacing: 10) {
-                        OptionButton(title: "Opção 1")
-                        OptionButton(title: "Opção 2")
-                    }
-                    HStack(spacing: 10) {
-                        OptionButton(title: "Opção 3")
-                        OptionButton(title: "Opção 4")
+                    VStack(spacing: 10) {
+                        HStack(spacing: 10) {
+                            OptionButton(title: "Opção 1")
+                            OptionButton(title: "Opção 2")
+                        }
+                        HStack(spacing: 10) {
+                            OptionButton(title: "Opção 3")
+                            OptionButton(title: "Opção 4")
+                        }
                     }
                 }
-            }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            // 🖼️ Direita: Imagem
-            Image("macaco")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
                 .padding()
-                .frame(width:300, height:300)
+                .frame(width: geometry.size.width * 0.5, height: geometry.size.height)
+                .background(Color.teal)
+
+                // 🖼️ Direita: Imagem
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height)
+                    .background(Color.teal)
+                    .clipped()
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .cornerRadius(16)
         }
-        .background(Color.teal)
-        .cornerRadius(16)
     }
 }
+
 
 struct OptionButton: View {
     var title: String
@@ -107,25 +112,30 @@ func makeSimplePage(text: String, imageName: String) -> UIViewController {
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            // Fundo como se fosse a mesa
-            Color.brown.opacity(0.2)
-                .ignoresSafeArea()
+        GeometryReader { geometry in
+            ZStack {
+                // Fundo como se fosse uma mesa
+                Color.brown.opacity(0.2)
+                    .ignoresSafeArea()
 
-            // Container do livro
-            PageCurlViewController(pages: [
-                            makeSimplePage(text: "Era uma vez um macaquinho...", imageName: "macaco"),
-                            makeSimplePage(text: "Ele adorava aventuras!", imageName: "coup.png"),
-                            makeSimplePage(text: "Fim da história!", imageName: "coup")
-                        ])
-            .frame(width: 900, height: 600) // Ajuste conforme o tamanho que quiser pro "livro"
-            .cornerRadius(16)
-            .shadow(radius: 10)
+                // Container do "livro"
+                PageCurlViewController(pages: [
+                    makeSimplePage(text: "Você acorda numa floresta encantada. De repente, enxerga um misterioso animal. Quando chega mais perto, você descobre que era um:", imageName: "macaco"),
+                    makeSimplePage(text: "Ele adorava aventuras!", imageName: "coup"),
+                    makeSimplePage(text: "Fim da história!", imageName: "coup")
+                ])
+                .frame(
+                    width: geometry.size.width * 0.85,
+                    height: geometry.size.height * 0.75
+                )
+                .cornerRadius(16)
+                .shadow(radius: 10)
+                // Centraliza o "livro" no centro da tela
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+            }
         }
     }
 }
-
-
 
 
 
