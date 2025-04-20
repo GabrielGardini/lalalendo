@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-struct PageCurlViewController: UIViewControllerRepresentable {
+struct ViewController: UIViewControllerRepresentable {
     var pages: [UIViewController]
 
     func makeCoordinator() -> Coordinator {
@@ -22,24 +22,32 @@ struct PageCurlViewController: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIPageViewController, context: Context) {}
 
     class Coordinator: NSObject, UIPageViewControllerDataSource {
-        var parent: PageCurlViewController
+        var parent: ViewController
 
-        init(_ parent: PageCurlViewController) {
+        init(_ parent: ViewController) {
             self.parent = parent
         }
 
         func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+            //aqui temos que ir para o no anterior da historia 
             guard let index = parent.pages.firstIndex(of: viewController), index > 0 else {
                 return nil
             }
-            return parent.pages[index - 1]
+            //se nao tiver na primeira pagina
+            path.removeLast()
+            currentPage = path.last
+            //return parent.pages[before]
+            return parent.pages[currentPage]  
         }
 
         func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+            //aqui temos que ir para o no seguinte da historia baseado na escolha da crianca
             guard let index = parent.pages.firstIndex(of: viewController), index + 1 < parent.pages.count else {
                 return nil
             }
-            return parent.pages[index + 1]
+            path.append(currentPage)
+            currentPage = next
+            return parent.pages[currentPage]
         }
     }
 }
@@ -48,6 +56,8 @@ struct PageCurlViewController: UIViewControllerRepresentable {
 struct SimplePageView: View {
     var text: String
     var imageName: String
+    var rightChoice: Int 
+    var leftChoice: Int
 
     var body: some View {
         GeometryReader { geometry in
@@ -60,8 +70,8 @@ struct SimplePageView: View {
 
                     VStack(spacing: 10) {
                         HStack(spacing: 10) {
-                            OptionButton(title: "Opção 1")
-                            OptionButton(title: "Opção 2")
+                            OptionButton(title: "Opção 1", leftChoice)
+                            OptionButton(title: "Opção 2", rightChoice)
                         }
                         HStack(spacing: 10) {
                             OptionButton(title: "Opção 3")
@@ -90,10 +100,11 @@ struct SimplePageView: View {
 
 struct OptionButton: View {
     var title: String
+    var choice: Int
 
     var body: some View {
         Button(action: {
-            print("Clicou em \(title)")
+            next = choice
         }) {
             Text(title)
                 .padding()
@@ -111,6 +122,11 @@ func makeSimplePage(text: String, imageName: String) -> UIViewController {
 }
 
 struct ContentView: View {
+    @State private var currentPage = 0
+    @State private var next = 0
+    @State private var path: [Int]
+    path.append(0) 
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -119,7 +135,7 @@ struct ContentView: View {
                     .ignoresSafeArea()
 
                 // Container do "livro"
-                PageCurlViewController(pages: [
+                ViewController(pages: [
                     makeSimplePage(text: "Você acorda numa floresta encantada. De repente, enxerga um misterioso animal. Quando chega mais perto, você descobre que era um:", imageName: "macaco"),
                     makeSimplePage(text: "Ele adorava aventuras!", imageName: "coup"),
                     makeSimplePage(text: "Fim da história!", imageName: "coup")
