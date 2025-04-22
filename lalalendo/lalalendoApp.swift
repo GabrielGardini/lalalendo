@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct lalalendoApp: App {
+    var settings = GlobalSettings()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(settings)
         }
     }
 }
