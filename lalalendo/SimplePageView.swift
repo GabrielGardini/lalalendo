@@ -14,6 +14,7 @@ struct SimplePageView: View {
     var defaultImage: String //essa vai ser a imagem default, a das escolhas muda no botao
     var rightChoice: Int
     var leftChoice: Int
+    //var question: String
     
     var rightButtonImage: String
     var rightButtonText: String
@@ -39,15 +40,11 @@ struct SimplePageView: View {
             HStack {
                 VStack(alignment: .center, spacing: 20) {
                     Button(action: {
-                        speak(text + "pergunta" + "botao1" + "botao2")
+                        speak(text + "pergunta" + leftButtonText + rightButtonText)
                     }) {
                         ZStack {
-                            Circle()
-                                .fill(Color(red: 217/255, green: 217/255, blue: 217/255))
-                                .frame(width: 50, height: 50)
-                            
                             Image(systemName: "speaker.wave.2.fill") // ou "mic.fill", "waveform", etc
-                                .font(.title2)
+                                .font(.largeTitle)
                                 .foregroundColor(Color(red: 88/255, green: 86/255, blue: 214/255))
                         }
                     }.frame(maxWidth: .infinity, alignment: .trailing)
