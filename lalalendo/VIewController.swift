@@ -72,7 +72,9 @@ func makeSimplePage(text: String, defaultImage: String, rightChoice: Int, leftCh
 
 func makeBookCover(text: String, imageName: String) -> UIViewController{
     let cover =  CoverView(text: text, imageName: imageName)
-    return UIHostingController(rootView: cover)
+    let hostingController = UIHostingController(rootView: cover)
+    hostingController.view.backgroundColor = .clear
+    return hostingController
 }
 
 func makeBookBackCover(text: String, imageName: String) -> UIViewController{

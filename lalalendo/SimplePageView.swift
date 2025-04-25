@@ -23,6 +23,7 @@ struct SimplePageView: View {
     var mainLeftImage: String
     
     @State private var imageName: String = ""
+    @State private var selectedButton: Int? = nil
     
     func speak(_ text: String) {
         let utterance = AVSpeechUtterance(string: text)
@@ -65,15 +66,19 @@ struct SimplePageView: View {
                         .padding()
                     
                     HStack (spacing:20){
-                        OptionButton(title: "Opção 1", image: leftButtonImage, onSelect: {
-                            imageName = mainLeftImage
-                            settings.next = leftChoice
+                        OptionButton(id: 1, title: "Opção 1", image: leftButtonImage, selectedButton: $selectedButton,
+                            onSelect: {
+                                imageName = mainLeftImage
+                                settings.next = leftChoice
+                                selectedButton = 1
                         })
                         
                         
-                        OptionButton(title: "Opção 1", image: rightButtonImage, onSelect: {
-                            imageName = mainRightImage
-                            settings.next = rightChoice
+                        OptionButton(id: 2, title: "Opção 1", image: rightButtonImage, selectedButton: $selectedButton,
+                            onSelect: {
+                                imageName = mainRightImage
+                                settings.next = rightChoice
+                                selectedButton = 2
                         })
                     }
                     Spacer()
@@ -99,48 +104,53 @@ struct SimplePageView: View {
     }
 
 struct OptionButton: View {
-        @EnvironmentObject var settings: GlobalSettings
-        var title: String
-        var image: String
-        var onSelect: () -> Void
+    @EnvironmentObject var settings: GlobalSettings
+    let id: Int
+    var title: String
+    var image: String
+    @Binding var selectedButton: Int?
+    var onSelect: () -> Void
+    
+    struct RoundedCornerShape: Shape {
+        var radius: CGFloat
+        var corners: UIRectCorner
         
-        struct RoundedCornerShape: Shape {
-            var radius: CGFloat
-            var corners: UIRectCorner
-            
-            func path(in rect: CGRect) -> Path {
-                let path = UIBezierPath(
-                    roundedRect: rect,
-                    byRoundingCorners: corners,
-                    cornerRadii: CGSize(width: radius, height: radius)
-                )
-                return Path(path.cgPath)
-            }
-        }
-        
-        var body: some View {
-            Button(action: {
-                onSelect()
-            }) {
-                VStack(alignment: .center, spacing:0) {
-                    Image(image)
-                        .resizable()
-                        .frame(width: 130, height: 130)
-                        .background(Color.black.opacity(0.2))
-                        .clipShape(
-                            RoundedCornerShape(radius: 8, corners: [.topLeft, .topRight])
-                        )
-                    ZStack {
-                        Rectangle()
-                            .fill(Color(red: 220/255, green: 231/255, blue: 249/255))
-                            .frame(width: 130, height: 30)
-                        
-                        Text("texto do botao")
-                            .foregroundColor(.black)
-                    }.clipShape(
-                        RoundedCornerShape(radius: 8, corners: [.bottomLeft, .bottomRight])
-                    )
-                }
-            }
+        func path(in rect: CGRect) -> Path {
+            let path = UIBezierPath(
+                roundedRect: rect,
+                byRoundingCorners: corners,
+                cornerRadii: CGSize(width: radius, height: radius)
+            )
+            return Path(path.cgPath)
         }
     }
+    
+    var body: some View {
+        Button(action: {
+            onSelect()
+        }) {
+            VStack(alignment: .center, spacing:0) {
+                Image(image)
+                    .resizable()
+                    .frame(width: 130, height: 130)
+                    .background(Color.black.opacity(0.2))
+                    .clipShape(
+                        RoundedCornerShape(radius: 8, corners: [.topLeft, .topRight])
+                    )
+                ZStack {
+                    Rectangle()
+                        .fill(Color(red: 220/255, green: 231/255, blue: 249/255))
+                        .frame(width: 130, height: 30)
+                    
+                    Text("texto do botao")
+                        .foregroundColor(.black)
+                }.clipShape(
+                    RoundedCornerShape(radius: 8, corners: [.bottomLeft, .bottomRight])
+                )
+            }.overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(selectedButton == id ? Color.purple : Color.clear, lineWidth: 4)
+            )
+        }
+    }
+}
