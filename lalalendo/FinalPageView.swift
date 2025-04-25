@@ -33,12 +33,8 @@ struct FinalPageView: View {
                         speak(text)
                     }) {
                         ZStack {
-                            Circle()
-                                .fill(Color(red: 217/255, green: 217/255, blue: 217/255))
-                                .frame(width: 50, height: 50)
-                            
                             Image(systemName: "speaker.wave.2.fill") // ou "mic.fill", "waveform", etc
-                                .font(.title2)
+                                .font(.largeTitle)
                                 .foregroundColor(Color(red: 88/255, green: 86/255, blue: 214/255))
                         }
                     }.frame(maxWidth: .infinity, alignment: .trailing)
