@@ -29,28 +29,43 @@ struct FinalPageView: View {
         GeometryReader { geometry in
             HStack {
                 VStack(alignment: .center, spacing: 20) {
+                    Button(action: {
+                        speak(text)
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(Color(red: 217/255, green: 217/255, blue: 217/255))
+                                .frame(width: 50, height: 50)
+                            
+                            Image(systemName: "speaker.wave.2.fill") // ou "mic.fill", "waveform", etc
+                                .font(.title2)
+                                .foregroundColor(Color(red: 88/255, green: 86/255, blue: 214/255))
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .trailing)
                     Text(text)
-                        .font(.title)
-                        .foregroundColor(.black)
+                        .font(.system(.largeTitle, design: .rounded))
+                        .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
-                    
-                    Text("pergunta")
-                        .font(.title)
-                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding()
+                    Spacer()
+
                     
                 }
-                .padding()
-                .frame(width: geometry.size.width * 0.5, alignment: .center)
-                .background(.clear)
-                
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: geometry.size.width * 0.5 )
-            }
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .background(Color.red)
-            .cornerRadius(16)
+                    .padding()
+                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height, alignment: .center)
+                    .background(.white)
+                    
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geometry.size.width * 0.5 )
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(Color.black)
+                .cornerRadius(16)
+            
+        
         }.onAppear{
             imageName = defaultImage
             settings.next = leftChoice // caso nao clique em nenhum a default eh toda pra esquerda

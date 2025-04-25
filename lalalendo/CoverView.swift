@@ -14,19 +14,22 @@ struct CoverView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            HStack(spacing: 0) {
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height)
-                    .background(Color.teal)
-                    .clipped()
-            }
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .background(Color.brown.opacity(0.2))
-            .cornerRadius(16)
+            ZStack {
+                // Fundo inteiro com a mesma cor do background geral
+                
+                HStack(spacing: 0) {
+                    Color.clear
+                        .frame(width: geometry.size.width * 0.5)
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geometry.size.width * 0.5)
+                        .clipped()
+                                
+                }.background(Color.clear)
+            }.background(Color.clear)
         }.onAppear{
-            settings.next = 1
-        }
+        settings.next = 1;
+        }.background(Color.clear)
     }
 }
