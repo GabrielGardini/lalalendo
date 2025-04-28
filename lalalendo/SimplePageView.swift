@@ -63,7 +63,7 @@ struct SimplePageView: View {
                         .padding()
                     
                     HStack (spacing:20){
-                        OptionButton(id: 1, title: "Opção 1", image: leftButtonImage, selectedButton: $selectedButton,
+                        OptionButton(id: 1, title: leftButtonText, image: leftButtonImage, selectedButton: $selectedButton,
                             onSelect: {
                                 imageName = mainLeftImage
                                 settings.next = leftChoice
@@ -71,7 +71,7 @@ struct SimplePageView: View {
                         })
                         
                         
-                        OptionButton(id: 2, title: "Opção 1", image: rightButtonImage, selectedButton: $selectedButton,
+                        OptionButton(id: 2, title: rightButtonText, image: rightButtonImage, selectedButton: $selectedButton,
                             onSelect: {
                                 imageName = mainRightImage
                                 settings.next = rightChoice
@@ -139,7 +139,7 @@ struct OptionButton: View {
                         .fill(Color(red: 220/255, green: 231/255, blue: 249/255))
                         .frame(width: 130, height: 30)
                     
-                    Text("texto do botao")
+                    Text(title)
                         .foregroundColor(.black)
                 }.clipShape(
                     RoundedCornerShape(radius: 8, corners: [.bottomLeft, .bottomRight])

@@ -39,9 +39,9 @@ struct ViewController: UIViewControllerRepresentable {
                 return nil
             }
             //se nao tiver na primeira pagina
-            settings.path.removeLast()
-            settings.currentPage = settings.path.last ?? 0
-            settings.next = settings.currentPage
+            settings.path.removeLast(1)
+            settings.currentPage = settings.path.popLast() ?? 0
+            //settings.next = settings.currentPage
             return parent.pages[settings.currentPage]
         }
         
