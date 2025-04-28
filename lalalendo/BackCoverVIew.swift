@@ -30,7 +30,7 @@ struct BackCoverView: View {
                 }.background(Color.clear)
             }.background(Color.clear)
         }.onAppear{
-            settings.next = 1;
+            settings.path.append(settings.currentPage)
         }.background(Color.clear)
     }
 }
