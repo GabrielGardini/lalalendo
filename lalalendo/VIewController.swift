@@ -56,11 +56,12 @@ struct ViewController: UIViewControllerRepresentable {
     }
 }
 
-func makeSimplePage(text: String, defaultImage: String, rightChoice: Int, leftChoice: Int, rightButtonImage: String, rightButtonText: String, leftButtonImage: String, leftButtonText: String, mainRightImage: String, mainLeftImage: String) -> UIViewController {
+func makeSimplePage(text: String, defaultImage: String, rightChoice: Int, leftChoice: Int, question: String, rightButtonImage: String, rightButtonText: String, leftButtonImage: String, leftButtonText: String, mainRightImage: String, mainLeftImage: String) -> UIViewController {
     let page = SimplePageView(text: text,
                               defaultImage: defaultImage,
                               rightChoice: rightChoice,
                               leftChoice: leftChoice,
+                              question: question,
                               rightButtonImage: rightButtonImage,
                               rightButtonText: rightButtonText,
                               leftButtonImage: leftButtonImage,
