@@ -4,6 +4,8 @@ class GlobalSettings: ObservableObject {
     @Published var currentPage = 0
     @Published var next = 0
     @Published var path: [Int] = []
+    @Published var choices: [Int] = []
+    @Published var selectedChoices: Int? = nil
 }
 
 struct ContentView: View {

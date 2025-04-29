@@ -35,6 +35,35 @@ struct SimplePageView: View {
         synthesizer.speak(utterance)
     }
     
+    func newPageSetup ( ) {
+        imageName = defaultImage
+        settings.next = leftChoice // caso nao clique em nenhum a default eh toda pra esquerda
+        //settings.path.append(settings.currentPage)
+        //settings.choices.append(0)
+    }
+    
+    func previousChoiceSetup( ) {
+        
+        guard settings.choices.count > 0 else {return}
+        
+        let previousChoice = settings.choices[settings.path.count - 2]
+        print(previousChoice)
+        switch previousChoice {
+        case 1:
+            imageName = mainLeftImage
+            settings.next = leftChoice
+            selectedButton = 1
+        case 2:
+            imageName = mainRightImage
+            settings.next = rightChoice
+            selectedButton = 2
+        default:
+            imageName = defaultImage
+            settings.next = leftChoice
+            selectedButton = nil
+        }
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             HStack {
@@ -68,6 +97,9 @@ struct SimplePageView: View {
                                 imageName = mainLeftImage
                                 settings.next = leftChoice
                                 selectedButton = 1
+                            
+                                //settings.choices.append(1)
+                            
                         })
                         
                         
@@ -76,6 +108,7 @@ struct SimplePageView: View {
                                 imageName = mainRightImage
                                 settings.next = rightChoice
                                 selectedButton = 2
+                              //  settings.choices.append(2)
                         })
                     }
                     Spacer()
@@ -93,9 +126,30 @@ struct SimplePageView: View {
                 .background(Color.black)
                 .cornerRadius(16)
             }.onAppear{
-                imageName = defaultImage
+               // imageName = defaultImage
                 settings.next = leftChoice // caso nao clique em nenhum a default eh toda pra esquerda
                 settings.path.append(settings.currentPage)
+                
+//                settings.choices.append(0)
+//                let goingBack = settings.path.count < settings.choices.count
+//                if goingBack {
+//                    previousChoiceSetup()
+//                }
+//                else {
+//                    newPageSetup()
+//                }
+                
+                print(settings.path)
+                print(settings.choices)
+                print("==========")
+                if settings.path.count == settings.choices.count + 2 {
+                    newPageSetup()
+                }
+                else {
+                    previousChoiceSetup()
+                }
+                print(settings.path)
+                print(settings.choices)
             }
         }
     }
