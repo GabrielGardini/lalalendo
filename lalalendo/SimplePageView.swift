@@ -85,8 +85,7 @@ struct SimplePageView: View {
                                 selectedButton = 2
                         })
                     }
-                    .padding(.bottom, 10)
-                  Spacer()
+                    .padding(.bottom, 32)
                 }
                 .padding()
                 .frame(width: geometry.size.width * 0.5, height: geometry.size.height, alignment: .center)
