@@ -26,17 +26,12 @@ struct SimplePageView: View {
     @State private var imageName: String = ""
     @State private var selectedButton: Int? = nil
     
-    // Atualização Marlon
-    private let synthesizer = AVSpeechSynthesizer()
-    
     func speak(_ text: String) {
-        // Se estiver falando, para primeiro
-        if synthesizer.isSpeaking {
-            synthesizer.stopSpeaking(at: .immediate)
-        }
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: "pt-BR")
-        utterance.rate = 0.5 // velocidade da fala (0.0 a 1.0)\
+        utterance.rate = 0.5 // velocidade da fala (0.0 a 1.0)
+        
+        let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(utterance)
     }
     
@@ -52,52 +47,47 @@ struct SimplePageView: View {
                                 .font(.largeTitle)
                                 .foregroundColor(Color(red: 88/255, green: 86/255, blue: 214/255))
                         }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.top, 15)
-                    .padding(.trailing, 10)
-                    
-//                    Spacer()
-                    
+                    }.frame(maxWidth: .infinity, alignment: .trailing)
+                    Spacer()
                     Text(text)
                         .font(.system(.largeTitle, design: .rounded))
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.horizontal, 15)
+                        .padding()
                     Text(question)
                         .font(.system(.title, design: .rounded))
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.horizontal, 50)
-
-                    HStack (spacing:20) {
-                        OptionButton(id: 1, title: "Opção 1", image: leftButtonImage, selectedButton: $selectedButton,
+                        .padding()
+                    
+                    HStack (spacing:20){
+                        OptionButton(id: 1, title: leftButtonText, image: leftButtonImage, selectedButton: $selectedButton,
                             onSelect: {
                                 imageName = mainLeftImage
                                 settings.next = leftChoice
                                 selectedButton = 1
                         })
                         
-                        OptionButton(id: 2, title: "Opção 1", image: rightButtonImage, selectedButton: $selectedButton,
+                        
+                        OptionButton(id: 2, title: rightButtonText, image: rightButtonImage, selectedButton: $selectedButton,
                             onSelect: {
                                 imageName = mainRightImage
                                 settings.next = rightChoice
                                 selectedButton = 2
                         })
                     }
-                    .padding(.bottom, 10)
-//                  Spacer()
+                    Spacer()
                 }
-                .padding()
-                .frame(width: geometry.size.width * 0.5, height: geometry.size.height, alignment: .center)
-                .background(.white)
-                
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: geometry.size.width * 0.5)
+                    .padding()
+                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height, alignment: .center)
+                    .background(.white)
+                    
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geometry.size.width * 0.5 )
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .background(Color.black)
@@ -106,12 +96,6 @@ struct SimplePageView: View {
                 imageName = defaultImage
                 settings.next = leftChoice // caso nao clique em nenhum a default eh toda pra esquerda
                 settings.path.append(settings.currentPage)
-            }
-            // Atualização Marlon
-            .onDisappear() {
-                if synthesizer.isSpeaking {
-                    synthesizer.stopSpeaking(at: .immediate)
-                }
             }
         }
     }
@@ -155,7 +139,7 @@ struct OptionButton: View {
                         .fill(Color(red: 220/255, green: 231/255, blue: 249/255))
                         .frame(width: 130, height: 30)
                     
-                    Text("texto do botao")
+                    Text(title)
                         .foregroundColor(.black)
                 }.clipShape(
                     RoundedCornerShape(radius: 8, corners: [.bottomLeft, .bottomRight])
