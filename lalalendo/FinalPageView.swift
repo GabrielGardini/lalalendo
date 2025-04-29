@@ -39,7 +39,7 @@ struct FinalPageView: View {
                         Text(text)
                             .font(.system(.title, design: .rounded))
                             .fontWeight(.semibold)
-                            .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.center) 
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
