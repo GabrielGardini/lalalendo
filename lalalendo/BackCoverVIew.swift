@@ -42,3 +42,4 @@ struct BackCoverView: View {
         }.background(Color.clear)
     }
 }
+

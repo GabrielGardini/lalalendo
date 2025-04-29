@@ -26,12 +26,17 @@ struct SimplePageView: View {
     @State private var imageName: String = ""
     @State private var selectedButton: Int? = nil
     
+    // Atualização Marlon
+    private let synthesizer = AVSpeechSynthesizer()
+    
     func speak(_ text: String) {
+        // Se estiver falando, para primeiro
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+        }
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: "pt-BR")
-        utterance.rate = 0.5 // velocidade da fala (0.0 a 1.0)
-        
-        let synthesizer = AVSpeechSynthesizer()
+        utterance.rate = 0.5 // velocidade da fala (0.0 a 1.0)\
         synthesizer.speak(utterance)
     }
     
@@ -42,34 +47,33 @@ struct SimplePageView: View {
                     Button(action: {
                         speak(text + question + leftButtonText + rightButtonText)
                     }) {
-                        ZStack {
-                            Image(systemName: "speaker.wave.2.fill") // ou "mic.fill", "waveform", etc
-                                .font(.largeTitle)
-                                .foregroundColor(Color(red: 88/255, green: 86/255, blue: 214/255))
-                        }
-                    }.frame(maxWidth: .infinity, alignment: .trailing)
+                        Image(systemName: "speaker.wave.2.fill") // ou "mic.fill", "waveform", etc
+                            .font(.largeTitle)
+                            .foregroundColor(Color(red: 88/255, green: 86/255, blue: 214/255))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     Spacer()
                     Text(text)
-                        .font(.system(.largeTitle, design: .rounded))
+                        .font(.system(.title, design: .rounded))
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding()
+                        .padding(.horizontal, 15)
                     Text(question)
                         .font(.system(.title, design: .rounded))
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding()
-                    
-                    HStack (spacing:20){
+                        .padding(.horizontal, 50)
+                        .padding(.bottom, 30)
+
+                    HStack (spacing:30) {
                         OptionButton(id: 1, title: leftButtonText, image: leftButtonImage, selectedButton: $selectedButton,
                             onSelect: {
                                 imageName = mainLeftImage
                                 settings.next = leftChoice
                                 selectedButton = 1
                         })
-                        
                         
                         OptionButton(id: 2, title: rightButtonText, image: rightButtonImage, selectedButton: $selectedButton,
                             onSelect: {
@@ -78,27 +82,33 @@ struct SimplePageView: View {
                                 selectedButton = 2
                         })
                     }
-                    Spacer()
-                }
-                    .padding()
-                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height, alignment: .center)
-                    .background(.white)
+                    .padding(.bottom, 40)
                     
-                    Image(imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geometry.size.width * 0.5 )
+                }
+                .padding()
+                .frame(width: geometry.size.width * 0.5, height: geometry.size.height, alignment: .center)
+                .background(.white)
+                
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: geometry.size.width * 0.5)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .background(Color.black)
                 .cornerRadius(16)
-            }.onAppear{
-                imageName = defaultImage
-                settings.next = leftChoice // caso nao clique em nenhum a default eh toda pra esquerda
-                settings.path.append(settings.currentPage)
+        }.onAppear{
+            selectedButton = 1
+            imageName = defaultImage
+            settings.next = leftChoice // caso nao clique em nenhum a default eh toda pra esquerda
+            settings.path.append(settings.currentPage)
+        }.onDisappear() {
+            if synthesizer.isSpeaking {
+                synthesizer.stopSpeaking(at: .immediate)
             }
         }
     }
+}
 
 struct OptionButton: View {
     @EnvironmentObject var settings: GlobalSettings
