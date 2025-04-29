@@ -29,23 +29,27 @@ struct SimplePageView: View {
     // Atualização Marlon
     private let synthesizer = AVSpeechSynthesizer()
     
-    func speak(_ text: String) {
-        // Se estiver falando, para primeiro
-        if synthesizer.isSpeaking {
-            synthesizer.stopSpeaking(at: .immediate)
+    func speak(_ text: [String]) { 
+            if synthesizer.isSpeaking {
+                synthesizer.stopSpeaking(at: .immediate)
+            } else {
+                for t in text {
+                    let utterance = AVSpeechUtterance(string: t)
+                    utterance.voice = AVSpeechSynthesisVoice(language: "pt-BR")
+                    utterance.rate = 0.5 // velocidade da fala (0.0 a 1.0)\
+                    utterance.postUtteranceDelay = 0.7
+                    
+                    synthesizer.speak(utterance)
+                }
+            }
         }
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "pt-BR")
-        utterance.rate = 0.5 // velocidade da fala (0.0 a 1.0)\
-        synthesizer.speak(utterance)
-    }
     
     var body: some View {
         GeometryReader { geometry in
             HStack {
                 VStack(alignment: .center, spacing: 20) {
                     Button(action: {
-                        speak(text + question + leftButtonText + rightButtonText)
+                        speak([text, question, leftButtonText, rightButtonText])
                     }) {
                         Image(systemName: "speaker.wave.2.fill") // ou "mic.fill", "waveform", etc
                             .font(.largeTitle)
