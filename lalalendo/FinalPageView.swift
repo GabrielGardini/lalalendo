@@ -16,12 +16,16 @@ struct FinalPageView: View {
     
     @State private var imageName: String = ""
     
+    private let synthesizer = AVSpeechSynthesizer()
+    
     func speak(_ text: String) {
+        // Se estiver falando, para primeiro
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+        }
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: "pt-BR")
-        utterance.rate = 0.5 // velocidade da fala (0.0 a 1.0)
-        
-        let synthesizer = AVSpeechSynthesizer()
+        utterance.rate = 0.5 // velocidade da fala (0.0 a 1.0)\
         synthesizer.speak(utterance)
     }
     
@@ -37,7 +41,11 @@ struct FinalPageView: View {
                                 .font(.largeTitle)
                                 .foregroundColor(Color(red: 88/255, green: 86/255, blue: 214/255))
                         }
-                    }.frame(maxWidth: .infinity, alignment: .trailing)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(.top, 15)
+                    .padding(.trailing, 10)
+
                     Text(text)
                         .font(.system(.largeTitle, design: .rounded))
                         .fontWeight(.semibold)
@@ -67,5 +75,11 @@ struct FinalPageView: View {
             settings.next = leftChoice // caso nao clique em nenhum a default eh toda pra esquerda
             settings.path.append(settings.currentPage)
         }
+        .onDisappear() {
+            if synthesizer.isSpeaking {
+                synthesizer.stopSpeaking(at: .immediate)
+            }
+        }
+
     }
 }
