@@ -43,7 +43,7 @@ struct SimplePageView: View {
     var body: some View {
         GeometryReader { geometry in
             HStack {
-                VStack(alignment: .center, spacing: 30) {
+                VStack(alignment: .center, spacing: 20) {
                     Button(action: {
                         speak(text + question + leftButtonText + rightButtonText)
                     }) {
@@ -52,11 +52,7 @@ struct SimplePageView: View {
                             .foregroundColor(Color(red: 88/255, green: 86/255, blue: 214/255))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 15)
-                    .padding(.leading, 10)
-                    .padding(.bottom, 32)
-                   
-                    
+                    Spacer()
                     Text(text)
                         .font(.system(.title, design: .rounded))
                         .fontWeight(.semibold)
@@ -69,6 +65,7 @@ struct SimplePageView: View {
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.horizontal, 50)
+                        .padding(.bottom, 30)
 
                     HStack (spacing:30) {
                         OptionButton(id: 1, title: leftButtonText, image: leftButtonImage, selectedButton: $selectedButton,
@@ -85,7 +82,8 @@ struct SimplePageView: View {
                                 selectedButton = 2
                         })
                     }
-                    .padding(.bottom, 32)
+                    .padding(.bottom, 40)
+                    
                 }
                 .padding()
                 .frame(width: geometry.size.width * 0.5, height: geometry.size.height, alignment: .center)

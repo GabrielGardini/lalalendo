@@ -41,7 +41,7 @@ struct ContentView: View {
                 ])
                     .frame(
                         width: geometry.size.width * 0.85,
-                        height: geometry.size.height * 0.90
+                        height: geometry.size.height * 0.85
                     )
                     .cornerRadius(16)
                     .shadow(radius: 10)

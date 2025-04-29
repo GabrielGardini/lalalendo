@@ -24,6 +24,13 @@ struct BackCoverView: View {
                         .frame(width: geometry.size.width * 0.5)
                         .clipped()
                     
+                    Text("Teste")
+                        .font(.system(.title, design: .rounded))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                        .padding()
+                        .frame(width: geometry.size.width * 0.5, height: geometry.size.height , alignment: .center)
+                        
                     // Parte da direita vazia, mas transparente
                     Color.clear
                         .frame(width: geometry.size.width * 0.5)
