@@ -47,60 +47,65 @@ struct SimplePageView: View {
     var body: some View {
         GeometryReader { geometry in
             HStack {
-                VStack(alignment: .center, spacing: 20) {
+                ZStack(alignment: .topLeading){
+                    VStack(alignment: .center, spacing: 20) {
+                        Spacer()
+                        Text(text)
+                            .font(.system(.title, design: .rounded))
+                            .fontWeight(.semibold)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true) //impedir as reticencias!!!
+                            .frame(alignment: .center)
+                            .padding(.top, 40)
+                            
+                        Spacer()
+                        Text(question)
+                            .font(.system(.title2, design: .rounded))
+                            .fontWeight(.semibold)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true) //impedir as reticencias!!!
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.horizontal, 50)
+                            .padding(.bottom, 20)
+                        
+                        HStack (spacing:50) {
+                            OptionButton(id: 1, title: leftButtonText, image: leftButtonImage, selectedButton: $selectedButton, onSelect: {
+                                imageName = mainLeftImage
+                                settings.next = leftChoice
+                                selectedButton = 1
+                            })
+                            
+                            OptionButton(id: 2, title: rightButtonText, image: rightButtonImage, selectedButton: $selectedButton,
+                                         onSelect: {
+                                imageName = mainRightImage
+                                settings.next = rightChoice
+                                selectedButton = 2
+                            })
+                        }.padding(.bottom, 30)
+                    }
+                    .padding()
+                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height, alignment: .center)
+                    .background(.white)
+                    
                     Button(action: {
                         speak([text, question, leftButtonText, rightButtonText])
                     }) {
-                        Image(systemName: "speaker.wave.2.fill") // ou "mic.fill", "waveform", etc
+                        Image(systemName: "speaker.wave.2.fill")
                             .font(.largeTitle)
                             .foregroundColor(Color(red: 88/255, green: 86/255, blue: 214/255))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    Spacer()
-                    Text(text)
-                        .font(.system(.title, design: .rounded))
-                        .fontWeight(.semibold)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.horizontal, 15)
-                    Text(question)
-                        .font(.system(.title, design: .rounded))
-                        .fontWeight(.semibold)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.horizontal, 50)
-                        .padding(.bottom, 30)
-
-                    HStack (spacing:30) {
-                        OptionButton(id: 1, title: leftButtonText, image: leftButtonImage, selectedButton: $selectedButton,
-                            onSelect: {
-                                imageName = mainLeftImage
-                                settings.next = leftChoice
-                                selectedButton = 1
-                        })
-                        
-                        OptionButton(id: 2, title: rightButtonText, image: rightButtonImage, selectedButton: $selectedButton,
-                            onSelect: {
-                                imageName = mainRightImage
-                                settings.next = rightChoice
-                                selectedButton = 2
-                        })
-                    }
-                    .padding(.bottom, 40)
-                    
+                    .padding()
                 }
-                .padding()
-                .frame(width: geometry.size.width * 0.5, height: geometry.size.height, alignment: .center)
-                .background(.white)
                 
                 Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: geometry.size.width * 0.5)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color.black)
-                .cornerRadius(16)
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .background((Color.black.opacity(0.25)))
+            .cornerRadius(16)
         }.onAppear{
             selectedButton = 1
             imageName = defaultImage
