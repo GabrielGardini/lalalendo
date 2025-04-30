@@ -29,7 +29,7 @@ struct BackCoverView: View {
                         .frame(width: geometry.size.width * 0.5)
                 }
                 
-                Text("Teste")
+                Text("Você chegou ao fim da história!")
                     .font(.system(.title, design: .rounded))
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
