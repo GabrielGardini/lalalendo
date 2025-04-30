@@ -19,7 +19,7 @@ struct ContentView: View {
                     .ignoresSafeArea()
                 
                 ViewController(pages: [
-                    makeBookCover(text: "As aventuras de Lala", imageName: "capa livro frente"),
+                    makeBookCover(text: "As aventuras de Lalaaaaaa aaaa aaa aaaaaa aaaaaa aaaa aaa aaaaaaaa aaaa aaaaaa aaaa a aa aaaa aaaaa aaaaa aaaaa aaa aaaaaaa", imageName: "capa livro frente"),
                     makeSimplePage(text: "Em um belo dia, você decide caminhar por uma estrada. Mas se depara com dois caminhos.", defaultImage: "id1 - default", rightChoice: 3, leftChoice: 2, question: "Qual você escolhe?", rightButtonImage: "id1 opcao2", rightButtonText: "Floresta", leftButtonImage: "id1 opcao1", leftButtonText: "Cidade", mainRightImage: "id1 opcao2", mainLeftImage: "id1 opcao1"),
                     makeSimplePage(text: "Ao chegar na cidade, percebe que ela está toda sem cores! Tudo é cinza, triste e sem graça. As casas, o céu, e até mesmo o parquinho.", defaultImage: "id2 default", rightChoice: 5, leftChoice: 4, question: "Qual parte você quer explorar?", rightButtonImage: "id2 opcao2", rightButtonText: "Parquinho", leftButtonImage: "id2 opcao1", leftButtonText: "Casas",  mainRightImage: "id2 opcao2", mainLeftImage: "id2 opcao1"),
                     makeSimplePage(text: "Ao chegar na floresta, encontra dois animais: um cachorrinho que parece estar perdido e um mico leão dourado deitado no galho de uma árvore.", defaultImage: "id3 default", rightChoice: 7, leftChoice: 6, question: "Com qual animal você quer falar?", rightButtonImage: "id3 opcao2", rightButtonText: "Mico", leftButtonImage: "id3 opcao1", leftButtonText: "Cão",  mainRightImage: "id3 opcao2", mainLeftImage: "id3 opcao1"),
