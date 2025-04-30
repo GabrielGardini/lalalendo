@@ -47,7 +47,7 @@ struct SimplePageView: View {
                     VStack(alignment: .center, spacing: 20) {
                         Spacer()
                         Text(text)
-                            .font(.system(.largeTitle, design: .rounded))
+                            .font(.system(.title, design: .rounded))
                             .fontWeight(.semibold)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true) //impedir as reticencias!!!
@@ -56,7 +56,7 @@ struct SimplePageView: View {
                             
                         Spacer()
                         Text(question)
-                            .font(.system(.title, design: .rounded))
+                            .font(.system(.title2, design: .rounded))
                             .fontWeight(.semibold)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true) //impedir as reticencias!!!
