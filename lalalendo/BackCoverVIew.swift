@@ -24,20 +24,20 @@ struct BackCoverView: View {
                         .frame(width: geometry.size.width * 0.5)
                         .clipped()
                     
-                    Text("Teste")
-                        .font(.system(.title, design: .rounded))
-                        .fontWeight(.semibold)
-                        .foregroundColor(.black)
-                        .padding()
-                        .frame(width: geometry.size.width * 0.5, height: geometry.size.height , alignment: .center)
-                        
-                    // Parte da direita vazia, mas transparente
                     Color.clear
                         .frame(width: geometry.size.width * 0.5)
-                }.background(Color.clear)
-            }.background(Color.clear)
-        }.onAppear{
-            settings.path.append(settings.currentPage)
+                }
+                
+                Text("Você chegou ao fim da história!")
+                    .font(.system(.title, design: .rounded))
+                    .fontWeight(.semibold)
+                    .foregroundColor(.black)
+                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.5)
+                    .position(x: geometry.size.width * 0.75, y: geometry.size.height / 2)
+            }
+            .onAppear{
+                settings.path.append(settings.currentPage)
+            }
         }.background(Color.clear)
     }
 }

@@ -68,7 +68,9 @@ func makeSimplePage(text: String, defaultImage: String, rightChoice: Int, leftCh
                               leftButtonText: leftButtonText,
                               mainRightImage: mainRightImage,
                               mainLeftImage: mainLeftImage)
-    return UIHostingController(rootView: page)
+    let hostingController = UIHostingController(rootView: page)
+    hostingController.view.backgroundColor = .clear
+    return hostingController
 }
 
 func makeBookCover(text: String, imageName: String) -> UIViewController{
@@ -88,6 +90,6 @@ func makeBookBackCover(text: String, imageName: String) -> UIViewController{
 func makeFinalPage(text: String, imageName: String, leftChoice: Int) -> UIViewController{
     let finalPage =  FinalPageView(text: text, defaultImage: imageName, leftChoice:leftChoice)
     let hostingController = UIHostingController(rootView: finalPage)
-    hostingController.view.backgroundColor = .orange
+    hostingController.view.backgroundColor = .clear
     return hostingController
 }

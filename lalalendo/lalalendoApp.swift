@@ -13,9 +13,7 @@ struct lalalendoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LibraryView()
-//            ContentView()
-//                .environmentObject(settings)
+            LibraryView().environmentObject(settings)
         }
     }
 }
