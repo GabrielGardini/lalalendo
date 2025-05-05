@@ -17,6 +17,7 @@ struct ViewController: UIViewControllerRepresentable {
             navigationOrientation: .horizontal,
             options: nil
         )
+        pageVC.delegate = context.coordinator
         pageVC.dataSource = context.coordinator
         pageVC.setViewControllers([pages[0]], direction: .forward, animated: true)
         return pageVC
@@ -24,70 +25,119 @@ struct ViewController: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIPageViewController, context: Context) {}
     
-    class Coordinator: NSObject, UIPageViewControllerDataSource {
+    class Coordinator: NSObject, UIPageViewControlgilerDataSource, UIPageViewControllerDelegate {
         var parent: ViewController
         var settings: GlobalSettings
+        var pendingIndex: Int?
         
         init(_ parent: ViewController, settings: GlobalSettings) {
             self.parent = parent
             self.settings = settings
         }
         
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]
+        ) {
+            if let nextVC = pendingViewControllers.first, let index = parent.pages.firstIndex(of: nextVC) {
+                pendingIndex = index
+            }
+        }
+        
+        func pageViewController(_ pageViewController: UIPageViewController,  viewControllerBefore viewController: UIViewController) -> UIViewController? {
             //aqui temos que ir para o no anterior da historia
             guard let index = parent.pages.firstIndex(of: viewController), index > 0 else {
                 return nil
             }
             //se nao tiver na primeira pagina
-            settings.path.removeLast(1)
-            settings.currentPage = settings.path.popLast() ?? 0
-            //settings.next = settings.currentPage
-            return parent.pages[settings.currentPage]
+            return parent.pages[index-1]
         }
         
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        func pageViewController(_ pageViewController: UIPageViewController,  viewControllerAfter viewController: UIViewController) -> UIViewController? {
             //aqui temos que ir para o no seguinte da historia baseado na escolha da crianca
             guard let index = parent.pages.firstIndex(of: viewController), index + 1 < parent.pages.count else {
                 return nil
             }
-            settings.currentPage = settings.next
-            return parent.pages[settings.currentPage]
+            return parent.pages[index+1]
         }
+        
+        func pageViewController(_ pageViewController: UIPageViewController,
+                                    didFinishAnimating finished: Bool,
+                                    previousViewControllers: [UIViewController],
+                                    transitionCompleted completed: Bool) {
+                if completed, let index = pendingIndex {
+                    settings.currentPage = index
+                    settings.path.append(index)
+                }
+                pendingIndex = nil
+            }
     }
 }
 
-func makeSimplePage(text: String, defaultImage: String, rightChoice: Int, leftChoice: Int, question: String, rightButtonImage: String, rightButtonText: String, leftButtonImage: String, leftButtonText: String, mainRightImage: String, mainLeftImage: String) -> UIViewController {
-    let page = SimplePageView(text: text,
-                              defaultImage: defaultImage,
-                              rightChoice: rightChoice,
-                              leftChoice: leftChoice,
-                              question: question,
-                              rightButtonImage: rightButtonImage,
-                              rightButtonText: rightButtonText,
-                              leftButtonImage: leftButtonImage,
-                              leftButtonText: leftButtonText,
-                              mainRightImage: mainRightImage,
-                              mainLeftImage: mainLeftImage)
-    return UIHostingController(rootView: page)
-}
+//        func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]
+//        ) {
+//            if let nextVC = pendingViewControllers.first, let index = parent.pages.firstIndex(of: nextVC) {
+//                pendingIndex = index
+//            }
+//        }
+//
+//        func pageViewController(_ pageViewController: UIViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+//
+//            if completed, let index = pendingIndex {
+//                settings.currentPage = index
+//                settings.path.append(index)
+//                settings.currentPage = settings.next
+////                guard let index = parent.pages.firstIndex(of: viewController), index + 1 < parent.pages.count else {
+////                    return nil
+////                }
+//
+//                  //  settings.currentPage = settings.next
+//                return parent.pages[settings.currentPage]
+//
+//            }
+//
+//                settings.path.removeLast(1)
+//                settings.currentPage = settings.path.popLast() ?? 0
+//            //return pendingIndex = nil
+//            return parent.pages[settings.currentPage]
+//
+//            }
+//           return parent.pages[settings.currentPage]
+//
+//           return index
+//        }
 
-func makeBookCover(text: String, imageName: String) -> UIViewController{
-    let cover =  CoverView(text: text, imageName: imageName)
-    let hostingController = UIHostingController(rootView: cover)
-    hostingController.view.backgroundColor = .clear
-    return hostingController
-}
 
-func makeBookBackCover(text: String, imageName: String) -> UIViewController{
-    let backCover =  BackCoverView(text: text, imageName: imageName)
-    let hostingController = UIHostingController(rootView: backCover)
-    hostingController.view.backgroundColor = .clear
-    return hostingController
-}
+    func makeSimplePage(text: String, defaultImage: String, rightChoice: Int, leftChoice: Int, question: String, rightButtonImage: String, rightButtonText: String, leftButtonImage: String, leftButtonText: String, mainRightImage: String, mainLeftImage: String) -> UIViewController {
+        let page = SimplePageView(text: text,
+                                  defaultImage: defaultImage,
+                                  rightChoice: rightChoice,
+                                  leftChoice: leftChoice,
+                                  question: question,
+                                  rightButtonImage: rightButtonImage,
+                                  rightButtonText: rightButtonText,
+                                  leftButtonImage: leftButtonImage,
+                                  leftButtonText: leftButtonText,
+                                  mainRightImage: mainRightImage,
+                                  mainLeftImage: mainLeftImage)
+        return UIHostingController(rootView: page)
+    }
 
-func makeFinalPage(text: String, imageName: String, leftChoice: Int) -> UIViewController{
-    let finalPage =  FinalPageView(text: text, defaultImage: imageName, leftChoice:leftChoice)
-    let hostingController = UIHostingController(rootView: finalPage)
-    hostingController.view.backgroundColor = .orange
-    return hostingController
-}
+    func makeBookCover(text: String, imageName: String) -> UIViewController{
+        let cover =  CoverView(text: text, imageName: imageName)
+        let hostingController = UIHostingController(rootView: cover)
+        hostingController.view.backgroundColor = .clear
+        return hostingController
+    }
+
+    func makeBookBackCover(text: String, imageName: String) -> UIViewController{
+        let backCover =  BackCoverView(text: text, imageName: imageName)
+        let hostingController = UIHostingController(rootView: backCover)
+        hostingController.view.backgroundColor = .clear
+        return hostingController
+    }
+
+    func makeFinalPage(text: String, imageName: String, leftChoice: Int) -> UIViewController{
+        let finalPage =  FinalPageView(text: text, defaultImage: imageName, leftChoice:leftChoice)
+        let hostingController = UIHostingController(rootView: finalPage)
+        hostingController.view.backgroundColor = .orange
+        return hostingController
+    }

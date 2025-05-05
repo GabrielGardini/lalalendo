@@ -30,6 +30,6 @@ struct CoverView: View {
             }.background(Color.clear)
         }.onAppear{
         settings.next = 1;
-        }.background(Color.clear)
+        }.background(Color.clear);
     }
 }
