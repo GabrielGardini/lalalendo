@@ -148,6 +148,7 @@ struct OptionButton: View {
             VStack(alignment: .center, spacing:0) {
                 Image(image)
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 130, height: 130)
                     .background(Color.black.opacity(0.2))
                     .clipShape(

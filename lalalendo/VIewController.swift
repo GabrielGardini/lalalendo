@@ -17,6 +17,7 @@ struct ViewController: UIViewControllerRepresentable {
             navigationOrientation: .horizontal,
             options: nil
         )
+        pageVC.delegate = context.coordinator
         pageVC.dataSource = context.coordinator
         pageVC.setViewControllers([pages[0]], direction: .forward, animated: true)
         return pageVC
@@ -24,14 +25,20 @@ struct ViewController: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIPageViewController, context: Context) {}
     
-    class Coordinator: NSObject, UIPageViewControllerDataSource {
+    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         var parent: ViewController
         var settings: GlobalSettings
+        var pendingIndex: Int?
         
         init(_ parent: ViewController, settings: GlobalSettings) {
             self.parent = parent
             self.settings = settings
         }
+        
+        func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+                    settings.isTransitioning = true
+                }
+        
         
         func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
             //aqui temos que ir para o no anterior da historia
@@ -53,6 +60,21 @@ struct ViewController: UIViewControllerRepresentable {
             settings.currentPage = settings.next
             return parent.pages[settings.currentPage]
         }
+        
+        
+        func pageViewController(_ pageViewController: UIPageViewController,
+                                    didFinishAnimating finished: Bool,
+                                    previousViewControllers: [UIViewController],
+                                    transitionCompleted completed: Bool) {
+            
+            if completed {
+                settings.isTransitioning = false
+            }
+
+                
+                
+            }
+        
     }
 }
 

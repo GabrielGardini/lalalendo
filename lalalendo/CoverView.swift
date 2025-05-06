@@ -18,21 +18,24 @@ struct CoverView: View {
                 HStack(spacing: 0) {
                     Color.clear
                         .frame(width: geometry.size.width * 0.5)
-                    
-                    ZStack {
-                        Image(imageName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .clipped()
-                    }
-                    .frame(width: geometry.size.width * 0.5,
-                            height: geometry.size.height)
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geometry.size.width * 0.5)
+                        .clipped()
+                                
+                }.background(Color.clear)
+            }.background {
+                if settings.isTransitioning {
+                    Image("fundo livro")
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Color.clear
                 }
             }
-        }
-        .background(Color.clear)
-        .onAppear {
-            settings.next = 1
-        }
+        }.onAppear{
+        settings.next = 1;
+        }.background(Color.clear);
     }
 }

@@ -4,6 +4,7 @@ class GlobalSettings: ObservableObject {
     @Published var currentPage = 0
     @Published var next = 0
     @Published var path: [Int] = []
+    @Published var isTransitioning: Bool = false
 }
 
 struct ContentView: View {
@@ -34,7 +35,7 @@ struct ContentView: View {
                     makeSimplePage(text: "Você vê que seu amigo está triste e decide ficar com ele. Você pode continuar no parquinho ou levá-lo para casa.", defaultImage: "id12 default", rightChoice: 16, leftChoice: 16, question: "O que você faz?", rightButtonImage: "id12 opcao2", rightButtonText: "Casa", leftButtonImage: "id12 opcao1", leftButtonText: "Parquinho", mainRightImage: "id12 opcao2", mainLeftImage: "id12 opcao1"),
                     makeSimplePage(text: "O cachorro correu para a floresta e você decidiu segui-lo. Lá, encontra uma árvore enorme que te dá uma vista de toda a floresta e também algumas pegadas.", defaultImage: "id13 default", rightChoice: 17, leftChoice: 17, question: "Qual delas você prefere explorar?", rightButtonImage: "id13 opcao2", rightButtonText: "Pegadas", leftButtonImage: "id13 opcao1", leftButtonText: "Árvore", mainRightImage: "id13 opcao2", mainLeftImage: "id13 opcao1"),
                     makeSimplePage(text: "Você encontra seu amigo, bem triste, com saudades de seu cachorrinho. Você pode levá-lo para casa ou esperar juntos na floresta até ele se sentir melhor?", defaultImage: "id14 default", rightChoice: 16, leftChoice: 16, question: "O que você vai fazer?", rightButtonImage: "id14 opcao2", rightButtonText: "Floresta", leftButtonImage: "id14 opcao1", leftButtonText: "Casa", mainRightImage: "id14 opcao2", mainLeftImage: "id14 opcao1"),
-                    makeSimplePage(text: "Na floresta mágica, você encontra vários animais encantados brincando felizes. Você pode se juntar a eles ou continuar procurando o cachorrinho?", defaultImage: "id15 default", rightChoice: 17, leftChoice: 17, question: "O que você prefere?", rightButtonImage: "id15 opcao2", rightButtonText: "Procurar cachorro", leftButtonImage: "id15 opcao1", leftButtonText: "Brincar", mainRightImage: "id15 opcao2", mainLeftImage: "id15 opcao1"),
+                    makeSimplePage(text: "Na floresta mágica, você encontra vários animais encantados brincando felizes. Você pode se juntar a eles ou continuar procurando o cachorrinho?", defaultImage: "id15 default", rightChoice: 17, leftChoice: 17, question: "O que você prefere?", rightButtonImage: "id15 opcao2", rightButtonText: "Procurar cão", leftButtonImage: "id15 opcao1", leftButtonText: "Brincar", mainRightImage: "id15 opcao2", mainLeftImage: "id15 opcao1"),
                     makeFinalPage(text: " Enquanto você fazia companhia pro seu amigo, o cachorrinho voltou correndo e pulou nos braços dele! Eles se reencontraram cheios de alegria, e todos brincaram juntos na floresta encantada. Às vezes, esperar com carinho é tudo o que um amigo precisa.", imageName: "id16 default", leftChoice: 18),
                     makeFinalPage(text: "Você encontra o cachorrinho e se encanta com suas cores, ele parecia um arco-íris, brincando feliz com outros bichinhos na floresta mágica. Então, você entende que aquele era o verdadeiro lar dele, e que, às vezes, amar é deixar quem a gente gosta ser feliz onde realmente pertence.", imageName: "id17 default", leftChoice: 18),
                     makeBookBackCover(text: "CAPA FECHADA", imageName: "backCover")
@@ -44,8 +45,7 @@ struct ContentView: View {
                         height: geometry.size.height * 0.95
                     )
                     .cornerRadius(16)
-                    .shadow(radius: 10)
-                // Centraliza o "livro" no centro da tela
+                    .shadow(radius: settings.isTransitioning ? 0 : 10)
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
             }.onAppear {
                 settings.path.append(0)
