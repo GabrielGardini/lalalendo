@@ -73,6 +73,7 @@ struct SimplePageView: View {
                                 imageName = mainLeftImage
                                 settings.next = leftChoice
                                 selectedButton = 1
+                            print("Next é \(settings.next)")
                         })
                         
                         OptionButton(id: 2, title: rightButtonText, image: rightButtonImage, selectedButton: $selectedButton,
@@ -80,6 +81,7 @@ struct SimplePageView: View {
                                 imageName = mainRightImage
                                 settings.next = rightChoice
                                 selectedButton = 2
+                            print("Next é \(settings.next)")
                         })
                     }
                     .padding(.bottom, 40)
@@ -98,10 +100,15 @@ struct SimplePageView: View {
                 .background(Color.black)
                 .cornerRadius(16)
         }.onAppear{
+            print("On appear")
             selectedButton = 1
             imageName = defaultImage
             settings.next = leftChoice // caso nao clique em nenhum a default eh toda pra esquerda
             settings.path.append(settings.currentPage)
+            print("Adicionei a pagina \(settings.currentPage)")
+            print("O path é \(settings.path)")
+            print("Next é \(settings.next)")
+            print("=================")
         }.onDisappear() {
             if synthesizer.isSpeaking {
                 synthesizer.stopSpeaking(at: .immediate)

@@ -4,6 +4,7 @@ class GlobalSettings: ObservableObject {
     @Published var currentPage = 0
     @Published var next = 0
     @Published var path: [Int] = []
+    @Published var isTransitioning: Bool = false
 }
 
 struct ContentView: View {
@@ -44,7 +45,7 @@ struct ContentView: View {
                         height: geometry.size.height * 0.85
                     )
                     .cornerRadius(16)
-                    .shadow(radius: 10)
+                    .shadow(radius: settings.isTransitioning ? 0 : 10)
                 // Centraliza o "livro" no centro da tela
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
             }.onAppear {

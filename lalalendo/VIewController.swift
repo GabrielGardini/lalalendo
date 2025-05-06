@@ -25,10 +25,11 @@ struct ViewController: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIPageViewController, context: Context) {}
     
-    class Coordinator: NSObject, UIPageViewControlgilerDataSource, UIPageViewControllerDelegate {
+    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         var parent: ViewController
         var settings: GlobalSettings
         var pendingIndex: Int?
+        var direction: Int = 0
         
         init(_ parent: ViewController, settings: GlobalSettings) {
             self.parent = parent
@@ -37,9 +38,13 @@ struct ViewController: UIViewControllerRepresentable {
         
         func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]
         ) {
+            print("Pending")
+            print(pendingViewControllers)
+            print("======")
             if let nextVC = pendingViewControllers.first, let index = parent.pages.firstIndex(of: nextVC) {
                 pendingIndex = index
             }
+            settings.isTransitioning = true
         }
         
         func pageViewController(_ pageViewController: UIPageViewController,  viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -47,8 +52,21 @@ struct ViewController: UIViewControllerRepresentable {
             guard let index = parent.pages.firstIndex(of: viewController), index > 0 else {
                 return nil
             }
+            let pageIndex = settings.path[settings.path.count-2]
+            //settings.path.removeLast(1)
+            //settings.currentPage = settings.path.popLast() ?? 0
+                        //return pendingIndex = nil
+            //return parent.pages[settings.currentPage]
+            
             //se nao tiver na primeira pagina
-            return parent.pages[index-1]
+           // return parent.pages[index-1]
+            print("Before")
+            print(settings.path)
+            print("===============")
+            direction = 1
+            let _ =  settings.path.popLast()
+            settings.currentPage =  settings.path.popLast() ?? 0
+            return parent.pages[pageIndex]
         }
         
         func pageViewController(_ pageViewController: UIPageViewController,  viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -56,18 +74,61 @@ struct ViewController: UIViewControllerRepresentable {
             guard let index = parent.pages.firstIndex(of: viewController), index + 1 < parent.pages.count else {
                 return nil
             }
-            return parent.pages[index+1]
+            let pageIndex = settings.next
+            //return parent.pages[index+1]
+            direction = 2
+            settings.currentPage = settings.next
+            print("After")
+            print(settings.path)
+            print("=======================")
+            return parent.pages[pageIndex]
         }
         
         func pageViewController(_ pageViewController: UIPageViewController,
                                     didFinishAnimating finished: Bool,
                                     previousViewControllers: [UIViewController],
                                     transitionCompleted completed: Bool) {
+            
+            print("Did Finish ANimating")
+                print(finished)
+            print(completed)
+            
                 if completed, let index = pendingIndex {
-                    settings.currentPage = index
-                    settings.path.append(index)
+                    print("Adjusting path")
+//                    settings.currentPage = index
+//                    settings.path.append(index)
+                    if direction == 1 {
+                        print("Back")
+                     //  let _ =  settings.path.popLast()
+                     //  settings.currentPage =  settings.path.popLast() ?? 0
+                    }
+                    if direction == 2 {
+                        print("Forward")
+                        print("Estou na pagina \(settings.currentPage)")
+                       // settings.currentPage = settings.next
+                    }
+                    print(settings.path)
+                    print("Next page is \(settings.next)")
+                    print("Current page is  \(settings.currentPage)")
+                    print("================")
                 }
+            
+            if !completed {
+                if direction == 2 {
+                    settings.path.popLast()
+                    settings.currentPage = settings.path[settings.path.count - 1]
+                    if let controller = self.parent.pages[settings.currentPage]  as? UIHostingController<SimplePageView> {
+                        print("Setei o valor correto")
+                        let page = controller.rootView
+                        settings.next = page.leftChoice
+                        print("Novo next é \(settings.next)")
+                    }
+                }
+                print("Novo path é \(settings.path)")
+            }
+
                 pendingIndex = nil
+                settings.isTransitioning = false
             }
     }
 }

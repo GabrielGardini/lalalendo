@@ -27,7 +27,15 @@ struct CoverView: View {
                         .clipped()
                                 
                 }.background(Color.clear)
-            }.background(Color.clear)
+            }.background {
+                if settings.isTransitioning {
+                    Image("fundo livro")
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Color.clear
+                }
+            }
         }.onAppear{
         settings.next = 1;
         }.background(Color.clear);
