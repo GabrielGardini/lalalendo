@@ -28,7 +28,7 @@ struct SimplePageView: View {
     
     // Atualização Marlon
     private let synthesizer = AVSpeechSynthesizer()
-    
+
     func speak(_ text: [String]) {
             if synthesizer.isSpeaking {
                 synthesizer.stopSpeaking(at: .immediate)
