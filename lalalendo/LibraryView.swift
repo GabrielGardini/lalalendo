@@ -20,7 +20,7 @@ extension Color {
 }
 
 struct LibraryView: View {
-    let imagens = ["capa livro frente", "capa-rainbow", "capa-floresta", "capa-mermaid", "capa-dragons", "capa-dragons"] // Array de nomes das imagens.
+    let imagens = ["capa livro frente", "capa-rainbow", "capa-floresta", "capa-mermaid", "capa-dragons", "capa-fadas"] // Array de nomes das imagens.
     @State private var currentIndex: Int = 0
     let columns = [GridItem(.flexible(minimum: 300, maximum: 350)), GridItem(.flexible(minimum: 300, maximum: 350)), GridItem(.flexible(minimum: 300, maximum: 350))]
     
