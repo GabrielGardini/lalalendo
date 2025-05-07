@@ -19,6 +19,7 @@
 		E7C7016F2DAE7EFF00FBA25F /* lalalendoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C7016E2DAE7EFF00FBA25F /* lalalendoTests.swift */; };
 		E7C701792DAE7EFF00FBA25F /* lalalendoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C701782DAE7EFF00FBA25F /* lalalendoUITests.swift */; };
 		E7C7017B2DAE7EFF00FBA25F /* lalalendoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C7017A2DAE7EFF00FBA25F /* lalalendoUITestsLaunchTests.swift */; };
+		ED60F6662DC2553400D29548 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED60F6652DC2553400D29548 /* LibraryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		E7C701742DAE7EFF00FBA25F /* lalalendoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lalalendoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C701782DAE7EFF00FBA25F /* lalalendoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lalalendoUITests.swift; sourceTree = "<group>"; };
 		E7C7017A2DAE7EFF00FBA25F /* lalalendoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lalalendoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		ED60F6652DC2553400D29548 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				E7C7015D2DAE7EFB00FBA25F /* lalalendoApp.swift */,
 				E7C7015F2DAE7EFB00FBA25F /* ContentView.swift */,
 				A436B3432DBA7F3900CF207C /* CoverView.swift */,
+				ED60F6652DC2553400D29548 /* LibraryView.swift */,
 				A436B3412DBA7EA100CF207C /* VIewController.swift */,
 				A436B3472DBA800100CF207C /* FinalPageView.swift */,
 				A436B3452DBA7FEA00CF207C /* BackCoverVIew.swift */,
@@ -276,6 +279,7 @@
 				A436B3462DBA7FEA00CF207C /* BackCoverVIew.swift in Sources */,
 				A436B3482DBA800100CF207C /* FinalPageView.swift in Sources */,
 				A436B3442DBA7F3900CF207C /* CoverView.swift in Sources */,
+				ED60F6662DC2553400D29548 /* LibraryView.swift in Sources */,
 				E7C7015E2DAE7EFB00FBA25F /* lalalendoApp.swift in Sources */,
 				A436B3422DBA7EA100CF207C /* VIewController.swift in Sources */,
 				A436B3402DBA6D8400CF207C /* SimplePageView.swift in Sources */,
@@ -445,7 +449,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -456,7 +461,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -474,7 +479,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -485,7 +491,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

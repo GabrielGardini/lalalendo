@@ -39,7 +39,7 @@ struct FinalPageView: View {
                         Text(text)
                             .font(.system(.title, design: .rounded))
                             .fontWeight(.semibold)
-                            .multilineTextAlignment(.center) 
+                            .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
@@ -67,7 +67,7 @@ struct FinalPageView: View {
                     .frame(width: geometry.size.width * 0.5 )
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
-            .background(Color.black)
+            .background((Color.black.opacity(0.25)))
             .cornerRadius(16)
             
             

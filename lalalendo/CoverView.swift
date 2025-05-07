@@ -15,8 +15,6 @@ struct CoverView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Fundo inteiro com a mesma cor do background geral
-                
                 HStack(spacing: 0) {
                     Color.clear
                         .frame(width: geometry.size.width * 0.5)
@@ -27,9 +25,17 @@ struct CoverView: View {
                         .clipped()
                                 
                 }.background(Color.clear)
-            }.background(Color.clear)
+            }.background {
+                if settings.isTransitioning {
+                    Image("fundo livro")
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Color.clear
+                }
+            }
         }.onAppear{
         settings.next = 1;
-        }.background(Color.clear)
+        }.background(Color.clear);
     }
 }

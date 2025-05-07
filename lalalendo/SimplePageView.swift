@@ -28,8 +28,8 @@ struct SimplePageView: View {
     
     // Atualização Marlon
     private let synthesizer = AVSpeechSynthesizer()
-    
-    func speak(_ text: [String]) { 
+
+    func speak(_ text: [String]) {
             if synthesizer.isSpeaking {
                 synthesizer.stopSpeaking(at: .immediate)
             } else {
@@ -148,6 +148,7 @@ struct OptionButton: View {
             VStack(alignment: .center, spacing:0) {
                 Image(image)
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 130, height: 130)
                     .background(Color.black.opacity(0.2))
                     .clipShape(

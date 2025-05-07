@@ -23,8 +23,6 @@ struct BackCoverView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: geometry.size.width * 0.5)
                         .clipped()
-                    
-                    // Parte da direita vazia, mas transparente
                     Color.clear
                         .frame(width: geometry.size.width * 0.5)
                 }
