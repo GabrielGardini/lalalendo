@@ -12,6 +12,10 @@
 		A436B3442DBA7F3900CF207C /* CoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A436B3432DBA7F3900CF207C /* CoverView.swift */; };
 		A436B3462DBA7FEA00CF207C /* BackCoverVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A436B3452DBA7FEA00CF207C /* BackCoverVIew.swift */; };
 		A436B3482DBA800100CF207C /* FinalPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A436B3472DBA800100CF207C /* FinalPageView.swift */; };
+		A4B91DFD2DD39065009A52B1 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B91DFC2DD39065009A52B1 /* Chapter.swift */; };
+		A4B91DFF2DD39399009A52B1 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B91DFE2DD39399009A52B1 /* Choice.swift */; };
+		A4B91E012DD3941E009A52B1 /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B91E002DD3941E009A52B1 /* Cover.swift */; };
+		A4B91E042DD396A5009A52B1 /* BackCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B91E032DD396A5009A52B1 /* BackCover.swift */; };
 		E7C7015E2DAE7EFB00FBA25F /* lalalendoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C7015D2DAE7EFB00FBA25F /* lalalendoApp.swift */; };
 		E7C701602DAE7EFB00FBA25F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C7015F2DAE7EFB00FBA25F /* ContentView.swift */; };
 		E7C701622DAE7EFF00FBA25F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C701612DAE7EFF00FBA25F /* Assets.xcassets */; };
@@ -45,6 +49,10 @@
 		A436B3432DBA7F3900CF207C /* CoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverView.swift; sourceTree = "<group>"; };
 		A436B3452DBA7FEA00CF207C /* BackCoverVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackCoverVIew.swift; sourceTree = "<group>"; };
 		A436B3472DBA800100CF207C /* FinalPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalPageView.swift; sourceTree = "<group>"; };
+		A4B91DFC2DD39065009A52B1 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
+		A4B91DFE2DD39399009A52B1 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
+		A4B91E002DD3941E009A52B1 /* Cover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cover.swift; sourceTree = "<group>"; };
+		A4B91E032DD396A5009A52B1 /* BackCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackCover.swift; sourceTree = "<group>"; };
 		E7C7015A2DAE7EFB00FBA25F /* lalalendo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lalalendo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C7015D2DAE7EFB00FBA25F /* lalalendoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lalalendoApp.swift; sourceTree = "<group>"; };
 		E7C7015F2DAE7EFB00FBA25F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +91,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4B91E022DD394F9009A52B1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A4B91E002DD3941E009A52B1 /* Cover.swift */,
+				A4B91DFC2DD39065009A52B1 /* Chapter.swift */,
+				A4B91E032DD396A5009A52B1 /* BackCover.swift */,
+				A4B91DFE2DD39399009A52B1 /* Choice.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		E7C701512DAE7EFB00FBA25F = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +127,7 @@
 			children = (
 				E7C7015D2DAE7EFB00FBA25F /* lalalendoApp.swift */,
 				E7C7015F2DAE7EFB00FBA25F /* ContentView.swift */,
+				A4B91E022DD394F9009A52B1 /* Models */,
 				A436B3432DBA7F3900CF207C /* CoverView.swift */,
 				ED60F6652DC2553400D29548 /* LibraryView.swift */,
 				A436B3412DBA7EA100CF207C /* VIewController.swift */,
@@ -277,11 +297,15 @@
 			files = (
 				E7C701602DAE7EFB00FBA25F /* ContentView.swift in Sources */,
 				A436B3462DBA7FEA00CF207C /* BackCoverVIew.swift in Sources */,
+				A4B91E042DD396A5009A52B1 /* BackCover.swift in Sources */,
 				A436B3482DBA800100CF207C /* FinalPageView.swift in Sources */,
+				A4B91DFD2DD39065009A52B1 /* Chapter.swift in Sources */,
 				A436B3442DBA7F3900CF207C /* CoverView.swift in Sources */,
 				ED60F6662DC2553400D29548 /* LibraryView.swift in Sources */,
+				A4B91DFF2DD39399009A52B1 /* Choice.swift in Sources */,
 				E7C7015E2DAE7EFB00FBA25F /* lalalendoApp.swift in Sources */,
 				A436B3422DBA7EA100CF207C /* VIewController.swift in Sources */,
+				A4B91E012DD3941E009A52B1 /* Cover.swift in Sources */,
 				A436B3402DBA6D8400CF207C /* SimplePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
