@@ -14,4 +14,3 @@ struct Chapter{
     var imageName: String
     let choices: [Choice]
 }
-

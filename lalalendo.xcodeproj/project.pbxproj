@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A427A5272DD7976A0006D78B /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = A427A5262DD7976A0006D78B /* Story.swift */; };
 		A436B3402DBA6D8400CF207C /* SimplePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A436B33F2DBA6D8400CF207C /* SimplePageView.swift */; };
 		A436B3422DBA7EA100CF207C /* VIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A436B3412DBA7EA100CF207C /* VIewController.swift */; };
 		A436B3442DBA7F3900CF207C /* CoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A436B3432DBA7F3900CF207C /* CoverView.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A427A5262DD7976A0006D78B /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		A436B33F2DBA6D8400CF207C /* SimplePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePageView.swift; sourceTree = "<group>"; };
 		A436B3412DBA7EA100CF207C /* VIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIewController.swift; sourceTree = "<group>"; };
 		A436B3432DBA7F3900CF207C /* CoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				A4B91E002DD3941E009A52B1 /* Cover.swift */,
+				A427A5262DD7976A0006D78B /* Story.swift */,
 				A4B91DFC2DD39065009A52B1 /* Chapter.swift */,
 				A4B91E032DD396A5009A52B1 /* BackCover.swift */,
 				A4B91DFE2DD39399009A52B1 /* Choice.swift */,
@@ -303,6 +306,7 @@
 				A436B3442DBA7F3900CF207C /* CoverView.swift in Sources */,
 				ED60F6662DC2553400D29548 /* LibraryView.swift in Sources */,
 				A4B91DFF2DD39399009A52B1 /* Choice.swift in Sources */,
+				A427A5272DD7976A0006D78B /* Story.swift in Sources */,
 				E7C7015E2DAE7EFB00FBA25F /* lalalendoApp.swift in Sources */,
 				A436B3422DBA7EA100CF207C /* VIewController.swift in Sources */,
 				A4B91E012DD3941E009A52B1 /* Cover.swift in Sources */,

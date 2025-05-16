@@ -11,5 +11,5 @@ struct Choice {
     let id: Int
     let title: String
     let buttonImage: String
-    let nextChapterId: String
+    let nextChapterId: Int
 }
